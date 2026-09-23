@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Syne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-serif: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-accessible: 'Atkinson Hyperlegible', sans-serif;
+  }
+
+  html {
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* High legibility mode toggle */
+  html.font-accessible-mode {
+    font-family: var(--font-accessible), sans-serif !important;
+  }
+
+  /* High contrast mode */
+  html.high-contrast-mode {
+    --tw-bg-opacity: 1;
+    filter: contrast(1.25);
+  }
+
+  /* Focus ring discipline */
+  :focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Ultra visible focus mode */
+  html.enhanced-focus-mode :focus-visible {
+    outline: 4px solid #f59e0b !important;
+    outline-offset: 4px !important;
+    box-shadow: 0 0 0 7px rgba(0, 0, 0, 0.9) !important;
+  }
+
+  /* Dark mode enhanced focus */
+  html.dark.enhanced-focus-mode :focus-visible {
+    outline: 4px solid #38bdf8 !important;
+    outline-offset: 4px !important;
+    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.95) !important;
+  }
+
+  /* User preferred reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Reduced motion manual override */
+  html.force-reduced-motion *,
+  html.force-reduced-motion *::before,
+  html.force-reduced-motion *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-serif-display {
+  font-family: var(--font-serif);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Print Styles for Accessible Resume */
+@media print {
+  header,
+  footer,
+  .a11y-toolbar,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  a {
+    text-decoration: underline !important;
+    color: #000 !important;
+  }
+
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+  }
+}
+
